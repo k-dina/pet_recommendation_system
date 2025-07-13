@@ -65,9 +65,8 @@ AWS_REGION=us-east-1
 HOST=0.0.0.0
 PORT=8000
 
-# AWS Credentials (for local development)
-AWS_ACCESS_KEY_ID=your_access_key_here
-AWS_SECRET_ACCESS_KEY=your_secret_key_here
+# use IAM roles for AWS in production. I will not be using AWS credentials in this source code.
+
 ```
 
 
