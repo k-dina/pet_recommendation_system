@@ -65,7 +65,7 @@ AWS_REGION=us-east-1
 HOST=0.0.0.0
 PORT=8000
 
-# use IAM roles for AWS in production. I will not be using AWS credentials in this source code.
+# use IAM roles for AWS in production. I will not be using AWS credentials in this source code, even for local development.
 
 ```
 
