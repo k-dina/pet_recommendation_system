@@ -79,3 +79,6 @@ python main.py
 # Or using uvicorn
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+### Development and deployment plan
+The other microservices are in development. This microservice is built to be an internal part of a bigger system, therefore the security is provided by higher-level tools like authentication on API gateway level + VPC + security groups. IAM is going to be used for access management.
