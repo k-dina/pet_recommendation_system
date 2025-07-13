@@ -29,29 +29,3 @@ class PetUpdate(BaseModel):
     health: Optional[str] = None
     sociability: Optional[str] = None
     budget: Optional[Annotated[float, Field(gt=0.0)]] = None
-
-
-class Pet(PetBase):
-    """Pet response model with ID"""
-
-    id: str
-
-    class Config:
-        from_attributes = True
-
-
-class PetResponse(BaseModel):
-    """Standard response wrapper"""
-
-    success: bool
-    message: str
-    data: Optional[Pet] = None
-
-
-class PetListResponse(BaseModel):
-    """Response for listing pets"""
-
-    success: bool
-    message: str
-    data: list[Pet] = []
-    count: int = 0
