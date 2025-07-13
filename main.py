@@ -1,3 +1,4 @@
+import logging
 import os
 
 import uvicorn
@@ -6,6 +7,14 @@ from fastapi import Depends, FastAPI, HTTPException, status
 from app.adapters.exceptions import NotFoundError
 from app.adapters.repository import DynamoDBPetRepository
 from app.domain.models import PetCreate, PetUpdate
+
+# Configure logging with detailed timestamp
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 
 def get_pet_repository() -> DynamoDBPetRepository:
@@ -45,9 +54,8 @@ async def create_pet(
     try:
         await pet_repository.create_pet(pet_data)
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
+        logger.error(f"Error creating pet: {e}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @app.put("/pets/{pet_id}", status_code=status.HTTP_200_OK)
@@ -64,9 +72,8 @@ async def update_pet(
             status_code=status.HTTP_404_NOT_FOUND, detail="Pet not found"
         )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
+        logger.error(f"Error updating pet: {e}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @app.delete("/pets/{pet_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -77,9 +84,8 @@ async def delete_pet(
     try:
         await pet_repository.delete_pet(pet_id)
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
+        logger.error(f"Error deleting pet: {e}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 def main() -> None:
