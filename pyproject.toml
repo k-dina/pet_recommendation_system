@@ -19,12 +19,14 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "bandit>=1.8.6", # Обновленная версия
-    "black>=25.1.0", # Обновленная версия
-    "flake8>=7.3.0", # Обновленная версия
-    "isort>=6.0.1",  # Обновленная версия
-    "mypy>=1.16.1",  # Обновленная версия
-    "pre-commit>=4.2.0", # Обновленная версия
+    "bandit>=1.8.6",
+    "black>=25.1.0",
+    "flake8>=7.3.0",
+    "isort>=6.0.1",
+    "mypy>=1.16.1",
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.0.0"
 ]
 
 [build-system]
@@ -65,3 +67,8 @@ warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
 ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+]
